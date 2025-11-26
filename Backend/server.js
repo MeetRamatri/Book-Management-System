@@ -42,22 +42,17 @@ app.get('/books', async (req, res) => {
   res.json(books);
 });
 
-app.post('/books/:id', async (req, res) => {
+app.patch('/books/:id', async (req, res) => {
   const { id } = req.params;
   const body = req.body;
   const book = await prisma.book.update({
     where: { id: parseInt(id) },
-    data:{
-      title: body.title,
-      summary: body.summary,
-      isbn: body.isbn,
-      url: body.url
-    }
+    data: body
   });
   res.json(book);
 });
 
-app.get('/books/:id', async (req, res) => {
+app.delete('/books/:id', async (req, res) => {
   const { id } = req.params;
   const book = await prisma.book.deleteMany({
     where: { id: parseInt(id) }
@@ -90,25 +85,17 @@ app.post('/authors', async (req, res) => {
   res.json(newAuthor);
 });
 
-app.post('/authors/:id', async (req, res) => {
+app.patch('/authors/:id', async (req, res) => {
   const { id } = req.params;
   const body = req.body;
   const author = await prisma.author.update({
     where: { id: parseInt(id) },
-    data:{
-      first_name: body.first_name,
-      family_name: body.family_name,
-      date_of_birth: body.date_of_birth,
-      date_of_death: body.date_of_death,
-      name: body.name,
-      lifespan: body.lifespan,
-      url: body.url
-    }
+    data: body
   });
   res.json(author);
 });
 
-app.get('/authors/:id', async (req, res) => {
+app.delete('/authors/:id', async (req, res) => {
   const { id } = req.params;
   const author = await prisma.author.deleteMany({
     where: { id: parseInt(id) }
@@ -135,20 +122,17 @@ app.post('/genres', async (req, res) => {
   res.json(newGenre);
 })
 
-app.post('/genres/:id', async (req, res) => {
+app.patch('/genres/:id', async (req, res) => {
   const { id } = req.params;
   const body = req.body;
   const genre = await prisma.genre.update({
     where: { id: parseInt(id) },
-    data:{
-      name: body.name,
-      url: body.url
-    }
+    data:body
   });
   res.json(genre);
 });
 
-app.get('/genres/:id', async (req, res) => {
+app.delete('/genres/:id', async (req, res) => {
   const { id } = req.params;
   console.log(id);
   const book = await prisma.genre.deleteMany({
